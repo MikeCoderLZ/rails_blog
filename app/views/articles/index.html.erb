@@ -1,22 +1,35 @@
-<h1>Listing Articles</h1>
+<!--
 
-<%= link_to 'New article', new_article_path %>
+<%= link_to 'new', new_article_path %>-->
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Text</th>
-    </tr>
-    
-    <% @articles.each do |article| %>
-        <tr>
-            <td><%= article.title %></td>
-            <td><%= article.text %></td>
-            <td><%= link_to 'Show', article_path(article) %></td>
-            <td><%= link_to 'Edit', edit_article_path(article) %></td>
-            <td><%= link_to 'Destroy', article_path(article),
-            method: :delete,
-            data: { confirm: 'Are your sure?' } %></td>
-        </tr>
-    <% end %>
-</table>
+<div class="top_bar">
+    <h1>Listing Articles</h1>
+</div>
+
+    <div class="article_field">
+        <% @articles.each do |article| %>
+                <h2><%= article.title %></h2>
+                
+                <div class="article_body">
+                    <% article.text.split(/[\r?\n]+/).each do |para| %>
+                        <p><%= para %></p>
+                    <%end%>
+                </div>
+                
+                <hr></hr>
+                <div class="button_panel">
+                    <div class="button">
+                        <%= link_to 'view', article_path(article) %>
+                    </div>
+                    <div class="button">
+                        <%= link_to 'edit', edit_article_path(article) %>
+                    </div>
+                    <div class="button">
+                        <%= link_to 'delete', article_path(article),
+                            method: :delete,
+                            data: { confirm: 'Are your sure?' } %>
+                    </div>
+                </div>
+                <hr></hr>
+        <% end %>
+    </div>
